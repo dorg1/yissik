@@ -1,7 +1,7 @@
 package org.openqa.selenium.example;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,7 +66,7 @@ public class SeleniumEx {
         System.out.println(" " + driver.getCurrentUrl());
         boolean isLoggedIn = webDriverWait.until(ExpectedConditions.urlToBe(url + "/#/"));
 
-        Assert.assertTrue("login unsuccessful. ", isLoggedIn);
+        Assert.assertTrue(isLoggedIn, "login unsuccessful. ");
 
 
 

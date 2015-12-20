@@ -1,7 +1,7 @@
 package org.openqa.selenium.example;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -80,7 +80,7 @@ public class SeleniumAdvanced {
 
         List<WebElement> elements = driver.findElements(By.linkText(namePattern));
 
-        Assert.assertTrue(namePattern + "is not in Leads", !elements.isEmpty());
+        Assert.assertTrue(!elements.isEmpty(), namePattern + "is not in Leads");
 
 
 
