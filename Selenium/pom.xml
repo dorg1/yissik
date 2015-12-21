@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>selenium</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>../TestNG</module>
+    </modules>
 
     <dependencies>
         <dependency>
