@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+
+<suite name="TestSuite" verbose="1" >
+    <test name="Calculator" >
+        <classes>
+            <class name="com.ilrd.TestCalculator" />
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="com.ilrd.TestListenerImpl" />
+    </listeners>
+
+</suite>
+
