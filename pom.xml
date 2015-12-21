@@ -5,60 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ilrd.selenium</groupId>
-    <artifactId>seleniumProj</artifactId>
+    <artifactId>TopQ</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-
-
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>2.48.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.9.10</version>
-        </dependency>
-
-    </dependencies>
-
-
-    <build>
-    <plugins>
-        <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
-        </configuration>
-    </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>2.4</version>
-            <configuration>
-                <attach>true</attach>
-            </configuration>
-
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>jar</goal>
-                    </goals>
-                </execution>
-            </executions>
-
-
-        </plugin>
-    </plugins>
-
-    </build>
-
-
-
+    <modules>
+        <module>selenium</module>
+    </modules>
 
 
 </project>
