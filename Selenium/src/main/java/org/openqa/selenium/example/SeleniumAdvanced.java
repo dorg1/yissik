@@ -16,9 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SeleniumAdvanced {
 
-
     private static final String URL = "http://localhost/sugar";
-
     private static String firstName;
     private static String lastName;
     private static final String SALUTATION = "Mr.";
@@ -54,12 +52,7 @@ public class SeleniumAdvanced {
         Select select = new Select(driver.findElement(By.id("salutation")));
         select.selectByValue(SALUTATION);
 
-        //driver.findElement(By.xpath("//select[@id='salutation']/option[@value='"+ SALUTATION +"']")).click();
-
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File("/tmp/screenshot.png"));
-
-        if(!driver.findElement(By.id("alt_checkbox")).isSelected()){// copied from Gali
+        if(!driver.findElement(By.id("alt_checkbox")).isSelected()){
 
             driver.findElement(By.id("alt_checkbox")).click();
         }
