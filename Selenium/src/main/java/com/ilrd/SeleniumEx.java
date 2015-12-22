@@ -1,4 +1,4 @@
-package org.openqa.selenium.example;
+package com.ilrd;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.testng.Assert;

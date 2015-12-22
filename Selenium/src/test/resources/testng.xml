@@ -2,10 +2,18 @@
 
 
 <suite name="Suite1" verbose="1" >
-    <test name="Nopackage" >
+    <test name="SugarCRM" >
+
+        <parameter name="userName" value="admin"/>
+        <parameter name="password" value="admin"/>
+
+
         <classes>
-            <class name="com.ilrd.selenium.TestNGSimpleTest" />
+            <class name="com.ilrd.test.SugarTest" />
         </classes>
+
+
+
     </test>
 
 </suite>

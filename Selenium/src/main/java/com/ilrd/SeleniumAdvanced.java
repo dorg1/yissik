@@ -1,4 +1,4 @@
-package org.openqa.selenium.example;
+package com.ilrd;
 
 import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
@@ -40,6 +40,7 @@ public class SeleniumAdvanced {
         driver.findElement(By.id("user_name")).sendKeys("admin");
         driver.findElement(By.id("user_password")).sendKeys("admin");
         driver.findElement(By.id("login_button")).click();
+
 
         driver.findElement(By.linkText("Sales")).click();
         driver.findElement(By.linkText("Leads")).click();
