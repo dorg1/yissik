@@ -1,6 +1,7 @@
 package com.ilrd.pages.sugarcrm;
 
 import com.ilrd.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,9 @@ public class SugarLogin extends BasePage {
     public SugarLogin(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        //check if in login page
+        driver.findElement(By.id("login_button"));
+
     }
 
 
@@ -52,4 +56,16 @@ public class SugarLogin extends BasePage {
         return login();
 
     }
+
+    public SugarLogin loginAsExpectingError(String userName, String password) {
+
+        typeUserName(userName);
+        typePassword(password);
+        loginButton.click();
+        return new SugarLogin(driver);
+
+
+    }
+
+
 }

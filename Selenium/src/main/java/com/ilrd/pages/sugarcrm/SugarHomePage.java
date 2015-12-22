@@ -1,6 +1,6 @@
 package com.ilrd.pages.sugarcrm;
 
-import com.ilrd.pages.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -12,7 +12,9 @@ public class SugarHomePage extends BaseSugarPage {
     public SugarHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        //TODO check if it actually homePage
+
+        //check if it actually homePage
+        driver.findElement(By.id("welcome"));
     }
 
 }
