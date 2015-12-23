@@ -1,5 +1,6 @@
 package com.ilrd.pages.sugarcrm;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +33,14 @@ public class SugarViewLeads extends BaseSugarPage {
         search.click();
         return this;
     }
+
+    public SugarDetailViewLead clickOnName(String text){
+
+        driver.findElement(By.linkText(text)).click();
+
+        return new SugarDetailViewLead(driver);
+    }
+
 
 
 

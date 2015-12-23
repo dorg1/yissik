@@ -11,23 +11,21 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class SugarModuleList extends BasePage{
 
-    SugarSubModuleList sugarSubModuleList;
-
-
     @FindBy(id = "grouptab_0")
     WebElement sales;
+
+    SugarSubModuleList sugarSubModuleList;
 
     public SugarModuleList(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        sugarSubModuleList = PageFactory.initElements(driver, SugarSubModuleList.class);
+        sugarSubModuleList = new SugarSubModuleList(driver);
     }
 
 
     public SugarSubModuleList sales() {
 
         sales.click();
-
         return sugarSubModuleList;
 
     }

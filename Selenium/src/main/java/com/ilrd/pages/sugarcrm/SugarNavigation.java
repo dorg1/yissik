@@ -18,7 +18,7 @@ public class SugarNavigation extends BasePage {
     public SugarNavigation(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        sugarModuleList = PageFactory.initElements(driver, SugarModuleList.class);
+        sugarModuleList = new SugarModuleList(driver);
     }
 
     public SugarSubModuleList sales(){

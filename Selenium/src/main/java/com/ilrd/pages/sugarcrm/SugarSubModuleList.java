@@ -3,6 +3,7 @@ package com.ilrd.pages.sugarcrm;
 import com.ilrd.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.internal.Streams;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -12,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 public class SugarSubModuleList extends BasePage{
 
 
-    @FindBy(id = "moduleTab_0_Leads")
+    @FindBy(linkText = "Leads")
     WebElement leads;
 
 
