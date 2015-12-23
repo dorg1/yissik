@@ -11,39 +11,29 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by student on 22/12/15.
  */
-public class SugarTest {
+public class SugarTest extends BaseTest{
 
-    private WebDriver driver;
     private String firstName;
     private String lastName;
     private String salutation = "Prof.";
 
 
+    public SugarTest() {
+        super("http://localhost/sugar");
+    }
+
     @BeforeMethod
     public void fixture(){
 
-        //TODO parametrize
-        //TODO driver factory
-        System.setProperty("webdriver.chrome.driver", "/home/student/chromedriver");
-        driver  = new ChromeDriver();
-
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("http://localhost/sugar");
         firstName = "firstName" + System.currentTimeMillis();
         lastName = "lastName" + System.currentTimeMillis();
 
     }
 
-
-    @AfterMethod
-    public void tearDown(){
-        driver.close();
-    }
 
     @Test(description = "SugarCRM: login and create lead")
     @Parameters({"userName", "password"})
@@ -87,11 +77,6 @@ public class SugarTest {
 
         Assert.assertTrue(p.isElementExist(By.linkText(newFullName)), fullName + " not found" );
 
-
-
-        //insert edit
-
-
     }
 
 
@@ -112,6 +97,7 @@ public class SugarTest {
 
 
     }
+
 
 
     public BaseSugarPage login(String userName, String password){
@@ -136,7 +122,7 @@ public class SugarTest {
 
     }
 
-    public BaseSugarPage editLead(BaseSugarPage p, String oldFullName, String first, String last, String salutation, boolean copyAddressFromLeftCheckbox){
+    public BaseSugarPage editLead(BaseSugarPage p, String oldFullName, String first, String last, String salutation, boolean copyAddressFromLeftCheckbox) {
 
         SugarViewLeads page = (SugarViewLeads) p;
 
@@ -144,14 +130,7 @@ public class SugarTest {
                 selectSalutation(salutation).copyAddressFromLeftCheckbox(copyAddressFromLeftCheckbox).saveLead();
 
 
-
     }
-
-
-
-
-
-
 
 
 
