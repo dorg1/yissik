@@ -13,7 +13,7 @@ import java.util.List;
  */
 public abstract class BasePage {
 
-    public final WebDriver driver;
+    protected final WebDriver driver;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -25,9 +25,6 @@ public abstract class BasePage {
 
         return !elements.isEmpty();
 
-
     }
-
-
 
 }
