@@ -4,19 +4,15 @@ import com.ilrd.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * Created by student on 23/12/15.
+ * Created by student on 24/12/15.
  */
-public abstract class BaseTWPage extends BasePage {
+public class TWAddNewTask extends BasePage{
 
 
-    public BaseTWPage(WebDriver driver) {
+    public TWAddNewTask(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-
 
     }
 

@@ -1,24 +1,23 @@
 package com.ilrd.pages.teamwork;
 
-import com.ilrd.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by student on 23/12/15.
  */
-public abstract class BaseTWPage extends BasePage {
+public class TWDashboardPage extends BaseTWPage {
 
+    private TWDashboardMenu menu;
 
-    public BaseTWPage(WebDriver driver) {
+    public TWDashboardPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-
+        menu = new TWDashboardMenu(driver);
 
     }
 
-
+    public TWDashboardMenu getMenu() {
+        return menu;
+    }
 }
