@@ -59,7 +59,7 @@ public class TWMilestonesPage extends TWDashboardPage {
 
         Actions  action = new Actions(driver);
 
-        action.moveToElement(milestone).build().perform();
+        action.moveToElement(milestone).click();
 
         return this;
 
@@ -72,7 +72,7 @@ public class TWMilestonesPage extends TWDashboardPage {
         action.moveToElement(milestone).perform();
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -88,9 +88,9 @@ public class TWMilestonesPage extends TWDashboardPage {
     public TWMilestonesPage selectTaskListToAttach(String taskListName){
 
 
-        Select select = new Select(driver.findElement(By.xpath("//select[@id='"+ "taskListId_" + milestoneId +"' ) ]]")));
+        Select select = new Select(driver.findElement(By.xpath("//select[@id='"+ "taskListId_" + milestoneId +"']")));
 
-        select.selectByValue(taskListName);
+        select.selectByVisibleText(taskListName);
 
         return this;
 

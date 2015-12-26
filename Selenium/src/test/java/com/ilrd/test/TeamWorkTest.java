@@ -85,8 +85,12 @@ public class TeamWorkTest extends BaseTest{
                         typeTaskListName(taskListName).addTaskList().
                                 getMenu().milestones().
                                 clickAddNewMilestone().typeName(milestoneName).saveNewMilestone().
-                                selectMilestoneToHandle(milestoneName).clickAttachTaskList().selectTaskListToAttach(taskListName);
+                                selectMilestoneToHandle(milestoneName).clickAttachTaskList().selectTaskListToAttach(taskListName).
+                getMenu().tasks();
 
+
+
+        page.isElementExist(By.xpath("//a[text()='" + taskListName + "']//../..//a[text()='"+milestoneName+"']"));
 
 
 
