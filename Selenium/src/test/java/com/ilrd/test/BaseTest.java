@@ -22,8 +22,9 @@ public class BaseTest {
 
     @BeforeMethod
     public void setupDriver(){
-        System.setProperty("webdriver.chrome.driver", "/home/student/chromedriver");
-        driver  = new ChromeDriver();
+        //System.setProperty("webdriver.chrome.driver", "/home/student/chromedriver");
+//        driver  = new ChromeDriver();
+        driver  = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
         driver.get(URL);
     }

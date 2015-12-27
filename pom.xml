@@ -12,6 +12,7 @@
     <modules>
         <module>Selenium</module>
         <module>TestNG</module>
+        <module>Spring</module>
     </modules>
 
 
@@ -24,6 +25,7 @@
         <mvn.surefire.version>2.19</mvn.surefire.version>
         <reportng.version>1.1.4</reportng.version>
         <google.inject.version>3.0</google.inject.version>
+        <spring.version>4.2.4.RELEASE</spring.version>
     </properties>
 
 </project>
