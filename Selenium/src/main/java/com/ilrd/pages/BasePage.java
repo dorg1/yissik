@@ -1,6 +1,7 @@
 package com.ilrd.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -14,9 +15,11 @@ import java.util.List;
 public abstract class BasePage {
 
     protected final WebDriver driver;
+    JavascriptExecutor jse;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        jse = (JavascriptExecutor) driver;
     }
 
     public boolean isElementExist(By by){
@@ -24,6 +27,14 @@ public abstract class BasePage {
         List<WebElement> elements = driver.findElements(by);
 
         return !elements.isEmpty();
+
+    }
+
+    public BasePage scrollToElement(WebElement element){
+
+        jse.executeScript("arguments[0].scrollIntoView()", element);
+
+        return this;
 
     }
 

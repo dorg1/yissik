@@ -45,12 +45,13 @@ public class TWLoginPage extends BasePage{
 
     }
 
-    public TWDashboardPage login() {
+    public TWOverviewPage login() {
         loginButton.click();
-        return new TWDashboardPage(driver);
+        return new TWOverviewPage(driver);
     }
 
-    public TWDashboardPage loginAs(String userName, String password) {
+
+    public TWOverviewPage loginAs(String userName, String password) {
 
         typeUserName(userName);
         typePassword(password);

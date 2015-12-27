@@ -20,6 +20,7 @@ public class TWTasksPage extends TWDashboardPage{
     private String taskListName;
     private String taskListId;
 
+    @FindBy(xpath = "//*")
     private WebElement taskList;
 
 
@@ -31,11 +32,11 @@ public class TWTasksPage extends TWDashboardPage{
     }
 
 
-    public TWAddTaskList addTaskList(){
+    public TWAddTaskListModule clickOnAddTaskList(){
 
         addTaskList.click();
 
-        return new TWAddTaskList(driver);
+        return new TWAddTaskListModule(driver);
     }
 
     public TWTasksPage selectTaskListToHandle(String taskListName){
@@ -55,6 +56,8 @@ public class TWTasksPage extends TWDashboardPage{
     public TWTasksPage clickAddNewTask(){
 
         taskList.findElement(By.xpath("div//button")).click();
+
+
         return this;
 
 

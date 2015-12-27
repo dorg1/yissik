@@ -1,10 +1,10 @@
 package com.ilrd.test;
 
-import com.ilrd.pages.BasePage;
-import com.ilrd.pages.teamwork.TWLoginPage;
-import com.ilrd.pages.teamwork.TWTasksPage;
+import com.ilrd.pages.teamwork.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -18,56 +18,50 @@ public class TeamWorkTest extends BaseTest{
 
     private static final String USER = "fake01@fake.com";
     private static final String PASSWORD = "fake";
-    private static final String ASSIGN_TASK_TO = "fake01 fake01 (me)";
-    private static final String TASK1 = "task1";
-    private static final String TASK2 = "task2";
-    private static String taskListName;
-    private static String milestoneName;
-
-
-
 
     public TeamWorkTest() {
         super("https://topq.teamwork.com");
     }
 
-    @BeforeMethod
-    public void fixture(){
-
-        taskListName = "yissikList_" + System.currentTimeMillis();
-        milestoneName = "yissikMilestone_" + System.currentTimeMillis();
-
-    }
 
     @Test
     public void testTWTaskList() {
 
-        TWLoginPage p = new TWLoginPage(driver);
 
-        BasePage page =
+        //perform login
+        Reporter.log("Perform login");
+        TWOverviewPage overviewPage = loginAs();
 
-                p.loginAs(USER, PASSWORD).getMenu().tasks().addTaskList().
-                typeTaskListName(taskListName).addTaskList().
-                selectTaskListToHandle(taskListName).clickAddNewTask().
-                typeNewTaskName(TASK1).assignTaskTo(ASSIGN_TASK_TO).saveTask().
-                typeNewTaskName(TASK2).assignTaskTo(ASSIGN_TASK_TO).saveTask().
-                getMenu().milestones().getMenu().tasks().selectTaskListToHandle(taskListName);
+        //add taskList
+        Reporter.log("Add new taskList");
+        final String taskListName = "yissikList_" + System.currentTimeMillis();
+        TWTasksPage tasksPage = addTaskList(overviewPage, taskListName);
 
+        //add tasks
+        final String task1 = "task1";
+        final String task2 = "task2";
+        final String assignTaskTo = "fake01 fake01 (me)";
+        Reporter.log("Add two tasks to \"" + taskListName +"\" taskList");
+        tasksPage.selectTaskListToHandle(taskListName).clickAddNewTask();
+        tasksPage.typeNewTaskName(task1).assignTaskTo(assignTaskTo).saveTask();
+        tasksPage.typeNewTaskName(task2).assignTaskTo(assignTaskTo).saveTask();
 
+        //verify tasks were added
+        Reporter.log("Verify the two tasks exist");
+        TWMilestonesPage milestonesPage = tasksPage.getMenu().milestones();
+        tasksPage = milestonesPage.getMenu().tasks();
+        Assert.assertTrue(tasksPage.isElementExist(By.linkText(taskListName)), "taskList [" + taskListName + "] not exists");
+        tasksPage.selectTaskListToHandle(taskListName);
+        List<String> tasks = tasksPage.getTasksFromTask();
+        Assert.assertEquals(tasks.size(), 2);
+        Assert.assertTrue(tasks.contains(task1), "task [" + task1  +"] does not exist");
+        Assert.assertTrue(tasks.contains(task2), "task [" + task2  +"] does not exist");
 
-        Assert.assertTrue(page.isElementExist(By.linkText(taskListName)), "taskList [" + taskListName + "] not exists");
-
-
-        List<String> tasks = ((TWTasksPage)page).getTasksFromTask();
-
-        Assert.assertTrue(tasks.contains(TASK1), "task [" + TASK1  +"] does not exist");
-        Assert.assertTrue(tasks.contains(TASK2), "task [" + TASK2  +"] does not exist");
-
-
-        ((TWTasksPage) page).getMenu().tasks().selectTaskListToHandle(taskListName).deleteTaskList();
-
+        //delete taskList
+        Reporter.log("Delete the added taskList");
+        tasksPage.selectTaskListToHandle(taskListName).deleteTaskList();
         //assert deletion
-        Assert.assertFalse(page.isElementExist(By.linkText(taskListName)), "taskList [" + taskListName + "] does exists");
+        Assert.assertFalse(tasksPage.isElementExist(By.linkText(taskListName)), "taskList [" + taskListName + "] does exists");
 
 
     }
@@ -75,25 +69,46 @@ public class TeamWorkTest extends BaseTest{
     @Test
     public void testTWMilestone(){
 
+        //perform login
+        Reporter.log("Perform login");
+        TWOverviewPage overviewPage = loginAs();
 
-        TWLoginPage p = new TWLoginPage(driver);
+        //add taskList
+        Reporter.log("Add new taskList");
+        final String taskListName = "yissikList_" + System.currentTimeMillis();
+        TWTasksPage tasksPage = addTaskList(overviewPage, taskListName);
 
-        BasePage page =
-                        p.loginAs(USER, PASSWORD).
-                                getMenu().tasks().
-                                addTaskList().
-                        typeTaskListName(taskListName).addTaskList().
-                                getMenu().milestones().
-                                clickAddNewMilestone().typeName(milestoneName).saveNewMilestone().
-                                selectMilestoneToHandle(milestoneName).clickAttachTaskList().selectTaskListToAttach(taskListName).
-                getMenu().tasks();
+        //add milestone
+        Reporter.log("Add new milestone");
+        TWMilestonesPage milestonesPage = tasksPage.getMenu().milestones();
+        final String milestoneName = "yissikMilestone_" + System.currentTimeMillis();
+        TWAddNewMilestonePage newMilestonePage = milestonesPage.clickAddNewMilestone();
+        milestonesPage = newMilestonePage.typeName(milestoneName).saveNewMilestone();
 
+        //attach taskList to milestone
+        Reporter.log("Attach taskList to milestone");
+        milestonesPage.selectMilestoneToHandle(milestoneName).hoverOnMilestone().clickAttachTaskList().selectTaskListToAttach(taskListName);
 
+        //verify taskList attached to milestone
+        Reporter.log("Verify taskList attached to milestone");
+        tasksPage = milestonesPage.getMenu().tasks();
+        tasksPage.isElementExist(By.xpath("//a[text()='" + taskListName + "']//../..//a[text()='"+milestoneName+"']"));
 
-        page.isElementExist(By.xpath("//a[text()='" + taskListName + "']//../..//a[text()='"+milestoneName+"']"));
+    }
 
+    private TWOverviewPage loginAs() {
+        TWLoginPage loginPage = new TWLoginPage(driver);
+        loginPage.typeUserName(USER);
+        loginPage.typePassword(PASSWORD);
+        return loginPage.login();
+    }
 
-
+    private TWTasksPage addTaskList(TWOverviewPage overviewPage, String taskListName) {
+        TWTasksPage tasksPage = overviewPage.getMenu().tasks();
+        TWAddTaskListModule addTaskListModule = tasksPage.clickOnAddTaskList();
+        addTaskListModule.typeTaskListName(taskListName);
+        tasksPage = addTaskListModule.clickOnAddTaskList();
+        return tasksPage;
     }
 
 

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by student on 24/12/15.
  */
-public class TWAddNewMilestoneForm extends BasePage {
+public class TWAddNewMilestonePage extends BasePage {
 
     @FindBy(id= "boxContents1")
     WebElement form;
@@ -22,12 +22,12 @@ public class TWAddNewMilestoneForm extends BasePage {
 
 
 
-    public TWAddNewMilestoneForm(WebDriver driver) {
+    public TWAddNewMilestonePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public TWAddNewMilestoneForm typeName(String name){
+    public TWAddNewMilestonePage typeName(String name){
 
         milestoneName.sendKeys(name);
 
@@ -41,10 +41,6 @@ public class TWAddNewMilestoneForm extends BasePage {
         return new TWMilestonesPage(driver);
 
     }
-
-
-
-
 
 
 

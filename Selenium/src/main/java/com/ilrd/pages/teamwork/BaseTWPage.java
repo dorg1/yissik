@@ -4,8 +4,6 @@ import com.ilrd.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by student on 23/12/15.

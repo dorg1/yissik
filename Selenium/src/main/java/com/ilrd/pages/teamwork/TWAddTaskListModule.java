@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Created by student on 24/12/15.
  */
-public class TWAddTaskList extends BaseTWPage{
+public class TWAddTaskListModule extends BaseTWPage{
 
 
     @FindBy(id = "newTaskListName")
@@ -17,13 +17,13 @@ public class TWAddTaskList extends BaseTWPage{
     @FindBy(xpath = "//div[@id='newTaskListFormFooter']/p/input")
     private WebElement newTaskListButton;
 
-    public TWAddTaskList(WebDriver driver) {
+    public TWAddTaskListModule(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver,this);
     }
 
 
-    public TWAddTaskList typeTaskListName(String text){
+    public TWAddTaskListModule typeTaskListName(String text){
 
         newTaskListNameBox.sendKeys(text);
 
@@ -31,7 +31,7 @@ public class TWAddTaskList extends BaseTWPage{
 
     }
 
-    public TWTasksPage addTaskList(){
+    public TWTasksPage clickOnAddTaskList(){
 
         newTaskListButton.click();
 

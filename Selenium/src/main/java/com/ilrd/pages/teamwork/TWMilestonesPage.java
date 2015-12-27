@@ -1,8 +1,6 @@
 package com.ilrd.pages.teamwork;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -28,7 +26,7 @@ public class TWMilestonesPage extends TWDashboardPage {
 
     }
 
-    public TWAddNewMilestoneForm clickAddNewMilestone(){
+    public TWAddNewMilestonePage clickAddNewMilestone(){
 
         try {
             Thread.sleep(3000);
@@ -37,7 +35,7 @@ public class TWMilestonesPage extends TWDashboardPage {
         }
 
         addMilestone.click();
-        return new TWAddNewMilestoneForm(driver);
+        return new TWAddNewMilestonePage(driver);
 
     }
 
@@ -50,16 +48,20 @@ public class TWMilestonesPage extends TWDashboardPage {
         String[] temp = href.split("/",20);
         milestoneId = temp[temp.length-1];
 
-        System.out.println(milestoneId);
 
         return this;
     }
 
     public TWMilestonesPage hoverOnMilestone(){
 
+
+        scrollToElement(milestone);
+
         Actions  action = new Actions(driver);
 
-        action.moveToElement(milestone).click();
+        action.moveToElement(milestone).perform();
+
+
 
         return this;
 
@@ -67,19 +69,9 @@ public class TWMilestonesPage extends TWDashboardPage {
 
     public TWMilestonesPage clickAttachTaskList(){
 
-        Actions  action = new Actions(driver);
 
-        action.moveToElement(milestone).perform();
+        driver.findElement(By.xpath("//a[contains(@onclick,'" + milestoneId + "' ) and contains(@id, 'attachTaskListBtn')]")).click();
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
-        driver.findElement(By.xpath("//a[contains(@onclick,'"+ milestoneId +"' ) and contains(@id, 'attachTaskListBtn')]")).click();
 
         return this;
 
