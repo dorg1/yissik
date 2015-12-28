@@ -26,6 +26,8 @@
         <reportng.version>1.1.4</reportng.version>
         <google.inject.version>3.0</google.inject.version>
         <spring.version>4.2.4.RELEASE</spring.version>
+        <aspectj.version>1.7.4</aspectj.version>
+        <allure.version>1.4.19</allure.version>
     </properties>
 
 </project>

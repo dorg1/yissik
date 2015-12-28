@@ -11,25 +11,14 @@
 
     <context:property-placeholder location="classpath:context.properties"/>
 
-
-    <import resource="file:${context.location}"/>
-
-    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:context.properties</value>
-            </list>
-        </property>
-        <property name="ignoreUnresolvablePlaceholders" value="true"/>
-    </bean>
+    <!--<import resource="file:${context.location}"/>-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.ilrd.example" />
 
 
-    <!--<context:property-placeholder location="file:${context.properties.location}"/>-->
+    <!--<bean id = "helloSpring" class="com.ilrd.example.HelloSpring">-->
+        <!--<property name="message" value="${hello.world}"/>-->
+    <!--</bean>-->
 
-
-
-
-
-    <context:component-scan base-package="com.ilrd" />
 
 </beans>

@@ -22,10 +22,6 @@ public class SugarTest extends BaseTest{
     private String salutation = "Prof.";
 
 
-    public SugarTest() {
-        super("http://localhost/sugar");
-    }
-
     @BeforeMethod
     public void fixture(){
 
@@ -47,7 +43,6 @@ public class SugarTest extends BaseTest{
 
         String fullName = salutation + " " + firstName + " " + lastName;
         Assert.assertTrue(p.isElementExist(By.linkText(fullName)), fullName + " not found" );
-
 
     }
 
@@ -78,9 +73,6 @@ public class SugarTest extends BaseTest{
         Assert.assertTrue(p.isElementExist(By.linkText(newFullName)), fullName + " not found" );
 
     }
-
-
-
 
 
 

@@ -3,6 +3,7 @@ package com.ilrd.test;
 import com.ilrd.pages.teamwork.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
@@ -13,15 +14,13 @@ import java.util.List;
 /**
  * Created by student on 23/12/15.
  */
+@Test
+@ContextConfiguration(locations = "classpath:seleniumContext.xml")
 public class TeamWorkTest extends BaseTest{
 
 
     private static final String USER = "fake01@fake.com";
     private static final String PASSWORD = "fake";
-
-    public TeamWorkTest() {
-        super("https://topq.teamwork.com");
-    }
 
 
     @Test
@@ -59,7 +58,13 @@ public class TeamWorkTest extends BaseTest{
 
         //delete taskList
         Reporter.log("Delete the added taskList");
-        tasksPage.selectTaskListToHandle(taskListName).deleteTaskList();
+        tasksPage = tasksPage.selectTaskListToHandle(taskListName).deleteTaskList();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+
+        }
         //assert deletion
         Assert.assertFalse(tasksPage.isElementExist(By.linkText(taskListName)), "taskList [" + taskListName + "] does exists");
 
@@ -98,8 +103,8 @@ public class TeamWorkTest extends BaseTest{
 
     private TWOverviewPage loginAs() {
         TWLoginPage loginPage = new TWLoginPage(driver);
-        loginPage.typeUserName(USER);
-        loginPage.typePassword(PASSWORD);
+        loginPage.typeUserName(setup.getDefaultUser());
+        loginPage.typePassword(setup.getDefaultPassword());
         return loginPage.login();
     }
 

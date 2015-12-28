@@ -1,6 +1,7 @@
 package com.ilrd.pages.teamwork;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,9 +35,25 @@ public class TWTasksPage extends TWDashboardPage{
 
     public TWAddTaskListModule clickOnAddTaskList(){
 
-        addTaskList.click();
+        int attempts = 3;
+        while (--attempts > 0) {
 
-        return new TWAddTaskListModule(driver);
+            try {
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+
+                }
+
+                addTaskList.click();
+
+                return new TWAddTaskListModule(driver);
+            }catch (StaleElementReferenceException e){
+            }
+        }
+
+        return null;
     }
 
     public TWTasksPage selectTaskListToHandle(String taskListName){
@@ -116,8 +133,7 @@ public class TWTasksPage extends TWDashboardPage{
 
         driver.findElement(By.xpath("//a[contains(@href,'"+ taskListId + "') and text()='Delete']")).click();
 
-
-        return this;
+        return new TWTasksPage(driver);
     }
 }
 
