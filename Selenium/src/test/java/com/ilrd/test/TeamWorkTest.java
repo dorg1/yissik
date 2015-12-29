@@ -3,7 +3,9 @@ package com.ilrd.test;
 import com.ilrd.pages.teamwork.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
@@ -15,13 +17,8 @@ import java.util.List;
  * Created by student on 23/12/15.
  */
 @Test
-@ContextConfiguration(locations = "classpath:seleniumContext.xml")
+@TestPropertySource(properties = "props.location=teamwork.properties")
 public class TeamWorkTest extends BaseTest{
-
-
-    private static final String USER = "fake01@fake.com";
-    private static final String PASSWORD = "fake";
-
 
     @Test
     public void testTWTaskList() {

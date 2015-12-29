@@ -9,7 +9,7 @@
 	http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 
-    <context:property-placeholder location="classpath:selenium.properties"/>
+    <context:property-placeholder location="classpath:${props.location}"/>
 
     <!--<import resource="file:${context.location}"/>-->
 
@@ -17,7 +17,7 @@
     <context:component-scan base-package="com.ilrd.seleniumutils" />
 
 
-    <bean id = "webDriver" class="${driver.class}" depends-on="beforeWebDriver" lazy-init="true"/>
+    <bean id = "webDriver" class="${driver.class}" depends-on="beforeWebDriver" lazy-init="true" destroy-method="close"/>
 
 
 </beans>

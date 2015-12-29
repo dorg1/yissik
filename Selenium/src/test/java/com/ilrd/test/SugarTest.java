@@ -5,6 +5,7 @@ import com.ilrd.pages.sugarcrm.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.test.context.TestPropertySource;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +16,8 @@ import org.testng.annotations.Test;
 /**
  * Created by student on 22/12/15.
  */
+@Test
+@TestPropertySource(properties = "props.location=sugarcrm.properties")
 public class SugarTest extends BaseTest{
 
     private String firstName;
